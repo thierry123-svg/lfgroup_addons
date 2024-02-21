@@ -5,10 +5,17 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='misc']/field[@name='company_id']" position="after">
-                <field  name="cni_number"/>
-                <field  name="niu_number"/>
-            </xpath>
+
+            <xpath expr="//field[@name='vat']" position="after">
+                <field  
+                   name="cni_number" 
+                   attrs="{'invisible': ['|', '&amp;', ('is_company','=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"
+                />
+                <field  
+                    name="niu_number"
+                    attrs="{'invisible': ['|', '&amp;', ('is_company','=', False),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"
+                />
+             </xpath>
         </field>
     </record>
 </odoo>
